@@ -1,0 +1,33 @@
+{
+  "name": "nutex",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sequelize:core:migrate": "sequelize --options-path ./.sequelize-core --env core db:migrate",
+    "sequelize:core:create": "sequelize --options-path ./.sequelize-core --env core migration:create --name",
+    "sequelize:core:seed:create": "sequelize --options-path ./.sequelize-core --env core seed:create --name",
+    "sequelize:core:migrate:undo": "sequelize --options-path ./.sequelize-core --env core db:migrate:undo:all",
+    "sequelize:core:seed:all": "sequelize --options-path ./.sequelize-core --env core db:seed:all",
+    "sequelize:core:seed:undo": "sequelize --options-path ./.sequelize-core --env core db:seed:undo:all"
+  },
+  "author": "bagus",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.3",
+    "express-busboy": "^9.0.0",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.3",
+    "sequelize-cli": "^6.5.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
