@@ -13,8 +13,6 @@ exports.getBalance = async (req, res) => {
       }
     );
 
-    console.log(getBalance);
-
     getBalance = getBalance ? getBalance.saldo : 0;
 
     return res.status(200).json({
