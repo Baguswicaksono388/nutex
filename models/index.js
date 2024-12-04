@@ -17,6 +17,7 @@ core = new Sequelize(
   databaseCore.username,
   databaseCore.password,
   {
+    host: databaseCore.host,
     dialect: databaseCore.dialect,
   }
 );
