@@ -1,29 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const serviceControllers = require('../controllers/service.controller');
-const auth = require('../middleware/middleware')
+const serviceControllers = require("../controllers/service.controller");
+const auth = require("../middleware/middleware");
 
 /**
  * @swagger
  * /v1/services:
  *   get:
- *     tags: 
- *       - 2. Module Information
- *     summary: Services
+ *     tags:
+ *       - Module Services
+ *     summary: Get list of services
  *     description: |
- *       **API Balance Private (memerlukan Token untuk mengaksesnya)**  
- * 
- *       Digunakan untuk mendapatkan informasi balance / saldo terakhir dari User.  
- * 
- *       _Ketentuan:_  
- *       1. Service ini harus menggunakan **Bearer Token JWT** untuk mengaksesnya.  
- *       2. Tidak ada parameter email di query param URL ataupun request body, parameter email diambil dari payload JWT yang didapatkan dari hasil login.  
- *       3. Handling Response sesuai dokumentasi Response di bawah.  
+ *       **API Get Services**
+ *
+ *       Digunakan untuk mendapatkan daftar layanan yang tersedia beserta tarifnya.
+ *       API ini memerlukan **Bearer Token JWT** untuk akses.
  *     security:
- *       - bearerAuth: []
+ *       - bearerAuth: []  # Menambahkan autentikasi Bearer Token
  *     responses:
  *       200:
- *         description: Berhasil mendapatkan balance
+ *         description: Berhasil mendapatkan daftar layanan
  *         content:
  *           application/json:
  *             schema:
@@ -34,13 +30,38 @@ const auth = require('../middleware/middleware')
  *                   example: 0
  *                 message:
  *                   type: string
- *                   example: Get Balance Berhasil
+ *                   example: Sukses
  *                 data:
- *                   type: object
- *                   properties:
- *                     balance:
- *                       type: number
- *                       example: 1000000
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       service_code:
+ *                         type: string
+ *                         example: PAJAK
+ *                       service_name:
+ *                         type: string
+ *                         example: Pajak PBB
+ *                       service_icon:
+ *                         type: string
+ *                         example: https://nutech-integrasi.app/dummy.jpg
+ *                       service_tariff:
+ *                         type: number
+ *                         example: 40000
+ *             examples:
+ *               success:
+ *                 value:
+ *                   status: 0
+ *                   message: Sukses
+ *                   data:
+ *                     - service_code: PAJAK
+ *                       service_name: Pajak PBB
+ *                       service_icon: https://nutech-integrasi.app/dummy.jpg
+ *                       service_tariff: 40000
+ *                     - service_code: PLN
+ *                       service_name: Listrik
+ *                       service_icon: https://nutech-integrasi.app/dummy.jpg
+ *                       service_tariff: 10000
  *       401:
  *         description: Unauthorized
  *         content:
@@ -50,14 +71,20 @@ const auth = require('../middleware/middleware')
  *               properties:
  *                 status:
  *                   type: number
- *                   example: 100
+ *                   example: 401
  *                 message:
  *                   type: string
- *                   example: Token tidak valid atau kadaluwarsa
+ *                   example: Unauthorized access. Token tidak valid atau kadaluwarsa.
  *                 data:
- *                   type: string
+ *                   type: null
  *                   example: null
+ *             examples:
+ *               unauthorized:
+ *                 value:
+ *                   status: 401
+ *                   message: Unauthorized access. Token tidak valid atau kadaluwarsa.
+ *                   data: null
  */
-router.get('/services', auth.auth, serviceControllers.getService);
+router.get("/services", auth.auth, serviceControllers.getService);
 
 module.exports = router;
