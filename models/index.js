@@ -19,7 +19,7 @@ core = new Sequelize(
   {
     host: databaseCore.host,
     dialect: databaseCore.dialect,
-    port: 12221,
+    port: databaseCore.port,
   }
 );
 

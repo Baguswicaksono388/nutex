@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const transactionControllers = require("../controllers/transaction.controller");
 const auth = require("../middleware/middleware");
+const {
+  toUpBalance,
+  topUpTransaction,
+  validateResults,
+} = require("../validators/transaction.validator");
 
 /**
  * @swagger
@@ -86,7 +91,13 @@ const auth = require("../middleware/middleware");
  *                   type: string
  *                   example: null
  */
-router.post("/transaction", auth.auth, transactionControllers.transaction);
+router.post(
+  "/transaction",
+  auth.auth,
+  topUpTransaction,
+  validateResults,
+  transactionControllers.transaction
+);
 
 /**
  * @swagger
@@ -156,7 +167,13 @@ router.post("/transaction", auth.auth, transactionControllers.transaction);
  *                   type: string
  *                   example: null
  */
-router.post("/topup", auth.auth, transactionControllers.topUp);
+router.post(
+  "/topup",
+  auth.auth,
+  toUpBalance,
+  validateResults,
+  transactionControllers.topUp
+);
 
 /**
  * @swagger

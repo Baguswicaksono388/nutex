@@ -142,7 +142,7 @@ exports.topUp = async (req, res) => {
       );
 
       let saldo = checkBalance ? checkBalance.saldo : 0;
-      saldo += req.body.top_up_amount;
+      saldo += parseFloat(req.body.top_up_amount);
 
       // Update or Insert Balance
       if (checkBalance) {
@@ -152,7 +152,7 @@ exports.topUp = async (req, res) => {
             WHERE user_id = :user_id;`,
           {
             replacements: {
-              balance: saldo, // Ensure the "balance" field is in replacements
+              balance: saldo,
               updatedAt: nowDate,
               user_id: userId,
             },
