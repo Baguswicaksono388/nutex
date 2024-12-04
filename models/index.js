@@ -16,7 +16,9 @@ core = new Sequelize(
   databaseCore.database,
   databaseCore.username,
   databaseCore.password,
-  databaseCore
+  {
+    dialect: databaseCore.dialect,
+  }
 );
 
 // Load models from the "core" directory
