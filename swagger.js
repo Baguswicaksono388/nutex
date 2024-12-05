@@ -10,7 +10,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: process.env.SERVER_URL || "http://localhost:5000",
+        url: "https://nutex-production.up.railway.app",
         description: "Local server",
       },
     ],
